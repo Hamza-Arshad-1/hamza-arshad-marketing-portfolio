@@ -21,6 +21,7 @@ import googleAdsImage from "@/assets/google-ads.webp";
 import hamzaImage from "@/assets/hamza.webp";
 import microsoftAdsImage from "@/assets/microsoft-ads.webp";
 import sprinklersLandscapingImage from "@/assets/sprinklers-landscaping-google-ads.webp";
+import septicServicesImage from "@/assets/septic-services-google-ads.webp";
 import { OG_IMAGE, absoluteUrl } from "@/lib/site";
 
 const linkedInUrl = "https://www.linkedin.com/in/hamza-arshad-profile/";
@@ -554,6 +555,47 @@ function PlatformsSection() {
           </div>
         </div>
 
+        <div>
+          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Septic Services (US)</h3>
+          <p className="mt-2 text-sm font-semibold text-muted-foreground">27 Apr – 24 Aug 2026</p>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <SnapshotCard
+              title="Septic Services"
+              period="27 Apr – 24 Aug 2026"
+              metrics={[
+                ["1.43K", "Clicks"],
+                ["567.85", "Conversions"],
+                ["$14.19", "Cost / Conversion"],
+                ["$8.06K", "Cost"],
+              ]}
+            />
+            <ScreenshotCard
+              image={septicServicesImage}
+              alt="Google Ads performance chart for a septic services business showing clicks, conversions, cost per conversion and cost"
+              caption="Google Ads campaign — Septic Services (US) · 27 Apr – 24 Aug 2026"
+            />
+          </div>
+          <article className="mt-6 rounded-lg border border-border bg-card p-6 shadow-card">
+            <h4 className="font-display text-lg font-bold text-ink">Top Search Terms Triggering Ads</h4>
+            <p className="mt-1 text-sm font-semibold text-muted-foreground">From the account's search terms report</p>
+            <PillList
+              items={[
+                "septic tank pumping",
+                "septic service near me",
+                "septic companies near me",
+                "septic pumping near me",
+                "septic tank pumping near me",
+                "septic system service near me",
+                "septic near me",
+                "septic services near me",
+                "septic company near me",
+                "septic tank cleaning",
+              ]}
+              className="mt-5"
+            />
+          </article>
+        </div>
+
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
             <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
@@ -661,7 +703,7 @@ const caseStudies = [
   {
     label: "Case Study · Paid Media",
     title: "Multi-Industry Paid Media",
-    tags: ["Healthcare", "HVAC", "Plumbing", "Roofing", "Landscaping", "Cleaning", "Legal", "Ecommerce", "Professional Services"],
+    tags: ["Healthcare", "HVAC", "Plumbing", "Roofing", "Landscaping", "Septic Services", "Cleaning", "Legal", "Ecommerce", "Professional Services"],
     rows: [
       ["Focus", "Google Ads, Meta Ads, Microsoft Ads, conversion tracking, campaign optimization and performance analysis."],
       ["Note", "Performance figures shown on this page relate to their stated reporting periods only."],
