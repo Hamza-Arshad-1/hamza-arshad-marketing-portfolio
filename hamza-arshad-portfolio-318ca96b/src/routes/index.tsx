@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import googleAdsImage from "@/assets/google-ads.webp";
 import hamzaImage from "@/assets/hamza.webp";
 import microsoftAdsImage from "@/assets/microsoft-ads.webp";
+import sprinklersLandscapingImage from "@/assets/sprinklers-landscaping-google-ads.webp";
 import { OG_IMAGE, absoluteUrl } from "@/lib/site";
 
 const linkedInUrl = "https://www.linkedin.com/in/hamza-arshad-profile/";
@@ -529,6 +530,30 @@ function PlatformsSection() {
           <ScreenshotCard image={googleAdsImage} alt="Google Ads overview dashboard showing spend, clicks, conversions and impressions" caption="Google Ads account overview — 25 Jul – 23 Aug 2026" />
         </div>
 
+        <div>
+          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Sprinklers & Landscaping (US)</h3>
+          <p className="mt-2 text-sm font-semibold text-muted-foreground">
+            30 Mar – 24 Aug 2026 · Conversions tracked as phone call leads and form submissions
+          </p>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <SnapshotCard
+              title="Sprinklers & Landscaping"
+              period="30 Mar – 24 Aug 2026"
+              metrics={[
+                ["1.03K", "Clicks"],
+                ["4.70%", "Actual ROAS"],
+                ["199.99", "Conversions"],
+                ["$2.81K", "Cost"],
+              ]}
+            />
+            <ScreenshotCard
+              image={sprinklersLandscapingImage}
+              alt="Google Ads performance chart for a sprinklers and landscaping business showing clicks, actual ROAS, conversions and cost"
+              caption="Google Ads campaign — Sprinklers & Landscaping (US) · 30 Mar – 24 Aug 2026"
+            />
+          </div>
+        </div>
+
         <div className="grid gap-8 lg:grid-cols-2">
           <div>
             <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
@@ -636,7 +661,7 @@ const caseStudies = [
   {
     label: "Case Study · Paid Media",
     title: "Multi-Industry Paid Media",
-    tags: ["Healthcare", "HVAC", "Plumbing", "Roofing", "Cleaning", "Legal", "Ecommerce", "Professional Services"],
+    tags: ["Healthcare", "HVAC", "Plumbing", "Roofing", "Landscaping", "Cleaning", "Legal", "Ecommerce", "Professional Services"],
     rows: [
       ["Focus", "Google Ads, Meta Ads, Microsoft Ads, conversion tracking, campaign optimization and performance analysis."],
       ["Note", "Performance figures shown on this page relate to their stated reporting periods only."],
