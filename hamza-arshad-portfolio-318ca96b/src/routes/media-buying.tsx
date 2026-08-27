@@ -1,21 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ComponentType } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
+  Briefcase,
   ChevronUp,
+  Dumbbell,
   Heart,
+  Home,
   Image as ImageIcon,
   Linkedin,
   MessageCircle,
   MoreHorizontal,
   Play,
+  Scale,
   Share2,
+  ShoppingBag,
   Sparkles,
+  SprayCan,
+  Wrench,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { absoluteUrl } from "@/lib/site";
+import sprinklersLandscapingImage from "@/assets/sprinklers-landscaping-google-ads.webp";
+import septicServicesImage from "@/assets/septic-services-google-ads.webp";
 
 const linkedInUrl = "https://www.linkedin.com/in/hamza-arshad-profile/";
 
@@ -200,6 +209,44 @@ const formatLabel: Record<Format, string> = {
   video: "Video",
 };
 
+// Icon shown inside a concept card's visual area, matched to the campaign's industry
+// so the placeholder reads as relevant art direction rather than a missing image.
+const industryIcon: Record<string, ComponentType<{ className?: string }>> = {
+  "Ecommerce Fashion": ShoppingBag,
+  "Real Estate": Home,
+  "Med Spa": Sparkles,
+  "Law Firm": Scale,
+  "Home Cleaning": SprayCan,
+  "Fitness Studio": Dumbbell,
+  "Auto Repair": Wrench,
+  "Professional Services": Briefcase,
+};
+
+const realResults = [
+  {
+    image: sprinklersLandscapingImage,
+    title: "Sprinklers & Landscaping (US)",
+    period: "30 Mar – 24 Aug 2026",
+    metrics: [
+      ["1.03K", "Clicks"],
+      ["4.70%", "Actual ROAS"],
+      ["199.99", "Conversions"],
+      ["$2.81K", "Cost"],
+    ],
+  },
+  {
+    image: septicServicesImage,
+    title: "Septic Services (US)",
+    period: "27 Apr – 24 Aug 2026",
+    metrics: [
+      ["1.43K", "Clicks"],
+      ["567.85", "Conversions"],
+      ["$14.19", "Cost / Conv."],
+      ["$8.06K", "Cost"],
+    ],
+  },
+];
+
 export const Route = createFileRoute("/media-buying")({
   component: MediaBuying,
   head: () => ({
@@ -252,6 +299,7 @@ function MediaBuying() {
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <SiteHeader />
       <HeroSection />
+      <RealResultsSection />
       <FilterBar active={active} onChange={setActive} />
       <GallerySection campaigns={filtered} />
       <ApproachSection />
@@ -314,6 +362,47 @@ function HeroSection() {
               <p className="font-display text-2xl font-bold text-ink">{value}</p>
               <p className="mt-1 text-xs font-semibold text-muted-foreground">{label}</p>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RealResultsSection() {
+  return (
+    <section className="border-b border-border/80 bg-surface">
+      <div className="section-shell section-pad">
+        <div className="flex items-center gap-4">
+          <p className="shrink-0 text-xs font-bold uppercase tracking-[0.22em] text-brand">Verified Results</p>
+          <span className="h-px flex-1 bg-border" aria-hidden="true" />
+        </div>
+        <h2 className="mt-5 font-display text-3xl font-bold text-ink text-balance sm:text-4xl">Real Campaign Screenshots</h2>
+        <p className="mt-3 max-w-2xl text-lg leading-8 text-muted-foreground">
+          Actual Google Ads account performance from live client campaigns — not mockups.
+        </p>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          {realResults.map((item) => (
+            <figure key={item.title} className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+              <img
+                src={item.image}
+                alt={`Google Ads performance chart for ${item.title}`}
+                className="w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption className="border-t border-border p-5">
+                <p className="font-display text-lg font-bold text-ink">{item.title}</p>
+                <p className="mt-1 text-xs font-semibold text-muted-foreground">{item.period}</p>
+                <div className="mt-4 grid grid-cols-4 gap-2">
+                  {item.metrics.map(([value, label]) => (
+                    <div key={label}>
+                      <p className="font-display text-sm font-bold text-ink">{value}</p>
+                      <p className="text-[10px] font-semibold text-muted-foreground">{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -418,10 +507,11 @@ function SearchCard({ campaign }: { campaign: Campaign }) {
 }
 
 function DisplayCard({ campaign, gradient }: { campaign: Campaign; gradient: string }) {
+  const Icon = industryIcon[campaign.industry] ?? ImageIcon;
   return (
     <article className="mb-5 break-inside-avoid overflow-hidden rounded-lg border border-border bg-card shadow-card">
       <div className="relative aspect-[16/10]" style={{ background: gradient }}>
-        <ImageIcon className="absolute inset-0 m-auto size-10 text-white/40" aria-hidden="true" />
+        <Icon className="absolute inset-0 m-auto size-10 text-white/40" aria-hidden="true" />
         <span className="absolute right-3 top-3 rounded-full bg-black/30 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur">
           Display
         </span>
@@ -444,6 +534,7 @@ function FeedCard({ campaign, gradient }: { campaign: Campaign; gradient: string
     .map((word) => word[0])
     .slice(0, 2)
     .join("");
+  const Icon = industryIcon[campaign.industry] ?? ImageIcon;
 
   return (
     <article className="mb-5 break-inside-avoid overflow-hidden rounded-lg border border-border bg-card shadow-card">
@@ -463,7 +554,7 @@ function FeedCard({ campaign, gradient }: { campaign: Campaign; gradient: string
       </div>
       <p className="px-4 pb-3 text-sm leading-6 text-foreground">{campaign.caption}</p>
       <div className="relative aspect-square" style={{ background: gradient }}>
-        <ImageIcon className="absolute inset-0 m-auto size-10 text-white/40" aria-hidden="true" />
+        <Icon className="absolute inset-0 m-auto size-10 text-white/40" aria-hidden="true" />
       </div>
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-4 text-muted-foreground" aria-hidden="true">
