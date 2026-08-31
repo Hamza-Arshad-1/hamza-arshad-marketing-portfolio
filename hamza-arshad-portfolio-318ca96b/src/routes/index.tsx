@@ -84,6 +84,8 @@ const metaCapabilities = [
   "Conversion API",
 ];
 
+const metaIndustries = ["Dentists", "Sports", "Cafe", "Education", "Clothing", "Food", "HVAC", "& Others"];
+
 const performanceMetrics = [
   ["CTR", "Creative & keyword relevance"],
   ["CPC", "Auction efficiency"],
@@ -601,7 +603,9 @@ function PlatformsSection() {
           <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <MiniMetricGrid metrics={[["$9.6K+", "Spend"], ["317", "Leads"], ["147K+", "Impressions"], ["84K+", "Reach"]]} />
             <article className="rounded-lg border border-border bg-card p-6 shadow-card">
-              <h3 className="font-display text-xl font-bold text-ink">Execution</h3>
+              <h3 className="font-display text-xl font-bold text-ink">Industries</h3>
+              <PillList items={metaIndustries} className="mt-5" />
+              <h3 className="mt-8 font-display text-xl font-bold text-ink">Execution</h3>
               <PillList items={metaCapabilities} className="mt-5" />
             </article>
           </div>
