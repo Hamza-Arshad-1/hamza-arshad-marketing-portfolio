@@ -596,40 +596,44 @@ function PlatformsSection() {
           </article>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div>
-            <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
-            <div className="mt-8 space-y-6">
-              <MiniMetricGrid metrics={[["$9.6K+", "Spend"], ["317", "Leads"], ["147K+", "Impressions"], ["84K+", "Reach"]]} />
-              <article className="rounded-lg border border-border bg-card p-6 shadow-card">
-                <h3 className="font-display text-xl font-bold text-ink">Execution</h3>
-                <PillList items={metaCapabilities} className="mt-5" />
-              </article>
-            </div>
-          </div>
-          <div>
-            <SectionHeader
-              eyebrow="06 / Platform"
-              title="Microsoft Advertising"
-              description="Two separate campaign snapshots, reported independently. Client work spans HVAC, marketing agency, septic supplies, bail bond and law industries."
-            />
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <SnapshotCard
-                title="HVAC Company"
-                period="July 1–31, 2026"
-                note="Client name withheld for privacy"
-                metrics={[["$42,099.41", "Spend"], ["6,916", "Clicks"], ["393,592", "Impressions"], ["$6.09", "Average CPC"]]}
-              />
-              <SnapshotCard
-                title="Marketing Agency"
-                period="Reported campaign snapshot"
-                note="Client name withheld for privacy"
-                metrics={[["$6,833.13", "Spend"], ["7,369", "Clicks"], ["719", "Conversions"], ["≈ $9.50", "CPA"]]}
-              />
-            </div>
+        <div>
+          <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
+          <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <MiniMetricGrid metrics={[["$9.6K+", "Spend"], ["317", "Leads"], ["147K+", "Impressions"], ["84K+", "Reach"]]} />
+            <article className="rounded-lg border border-border bg-card p-6 shadow-card">
+              <h3 className="font-display text-xl font-bold text-ink">Execution</h3>
+              <PillList items={metaCapabilities} className="mt-5" />
+            </article>
           </div>
         </div>
-        <ScreenshotCard image={microsoftAdsImage} alt="Microsoft Advertising dashboard showing spend, clicks, conversions and impressions" caption="Microsoft Advertising overview — Marketing Agency snapshot (client name withheld)" />
+
+        <div>
+          <SectionHeader
+            eyebrow="06 / Platform"
+            title="Microsoft Advertising"
+            description="Two separate campaign snapshots, reported independently. Client work spans HVAC, marketing agency, septic supplies, bail bond and law industries."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <SnapshotCard
+              title="HVAC Company"
+              period="July 1–31, 2026"
+              note="Client name withheld for privacy"
+              metrics={[["$42,099.41", "Spend"], ["6,916", "Clicks"], ["393,592", "Impressions"], ["$6.09", "Average CPC"]]}
+            />
+            <SnapshotCard
+              title="Marketing Agency"
+              period="Reported campaign snapshot"
+              note="Client name withheld for privacy"
+              metrics={[["$6,833.13", "Spend"], ["7,369", "Clicks"], ["719", "Conversions"], ["≈ $9.50", "CPA"]]}
+            />
+          </div>
+          <ScreenshotCard
+            image={microsoftAdsImage}
+            alt="Microsoft Advertising dashboard showing spend, clicks, conversions and impressions"
+            caption="Microsoft Advertising overview — Marketing Agency snapshot (client name withheld)"
+            className="mt-6"
+          />
+        </div>
       </div>
     </section>
   );
@@ -954,9 +958,19 @@ function MiniMetricGrid({ metrics }: { metrics: string[][] }) {
   );
 }
 
-function ScreenshotCard({ image, alt, caption }: { image: string; alt: string; caption: string }) {
+function ScreenshotCard({
+  image,
+  alt,
+  caption,
+  className = "",
+}: {
+  image: string;
+  alt: string;
+  caption: string;
+  className?: string;
+}) {
   return (
-    <figure className="overflow-hidden rounded-lg border border-border bg-card shadow-soft">
+    <figure className={`overflow-hidden rounded-lg border border-border bg-card shadow-soft ${className}`}>
       <img src={image} alt={alt} className="aspect-[16/8] w-full object-cover" loading="lazy" />
       <figcaption className="flex items-center gap-2 border-t border-border bg-surface-elevated px-5 py-4 text-sm font-semibold text-muted-foreground">
         <LineChart className="size-4 text-brand" aria-hidden="true" />
