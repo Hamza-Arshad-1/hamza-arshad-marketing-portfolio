@@ -779,43 +779,35 @@ const outcomes = [
 ];
 
 function WorkSection() {
-  const [active, setActive] = useState(0);
-  const current = caseStudies[active] ?? caseStudies[0]!;
-
   return (
     <Section id="work" eyebrow="09 / Evidence" title="Selected Work" description="Case studies included as evidence of hands-on experience.">
-      <div className="flex flex-wrap gap-2">
-        {caseStudies.map((study, index) => (
-          <button
-            key={study.title}
-            type="button"
-            onClick={() => setActive(index)}
-            className={
-              active === index
-                ? "rounded-full bg-brand px-4 py-2 text-sm font-bold text-brand-foreground shadow-none transition-colors"
-                : "rounded-full border border-border bg-secondary px-4 py-2 text-sm font-bold text-secondary-foreground transition-colors hover:bg-surface-soft"
-            }
-          >
-            {study.label}
-          </button>
-        ))}
-      </div>
-      <article className="mt-5 rounded-lg border border-border bg-card p-6 shadow-card sm:p-8">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">{current.label}</p>
-        <h3 className="mt-4 font-display text-2xl font-bold text-ink sm:text-3xl">{current.title}</h3>
-        <PillList items={current.tags} className="mt-5" />
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {current.rows.map(([label, text]) => (
-            <div key={label}>
-              <p className="flex items-center gap-2 font-bold text-foreground">
-                <MousePointerClick className="size-4 text-brand" aria-hidden="true" />
-                {label}
-              </p>
-              <p className="mt-2 leading-7 text-muted-foreground">{text}</p>
-            </div>
+      <div className="relative">
+        <div className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-4">
+          {caseStudies.map((study) => (
+            <article
+              key={study.title}
+              className="w-[85vw] shrink-0 snap-start rounded-lg border border-border bg-card p-6 shadow-card sm:w-[560px] sm:p-8"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">{study.label}</p>
+              <h3 className="mt-4 font-display text-2xl font-bold text-ink sm:text-3xl">{study.title}</h3>
+              <PillList items={study.tags} className="mt-5" />
+              <div className="mt-8 space-y-6">
+                {study.rows.map(([label, text]) => (
+                  <div key={label}>
+                    <p className="flex items-center gap-2 font-bold text-foreground">
+                      <MousePointerClick className="size-4 text-brand" aria-hidden="true" />
+                      {label}
+                    </p>
+                    <p className="mt-2 leading-7 text-muted-foreground">{text}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
-      </article>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+      </div>
+      <p className="mt-2 text-xs font-semibold text-muted-foreground">Scroll to see all case studies →</p>
       <div className="mt-10 grid grid-cols-1 divide-y divide-border overflow-hidden rounded-lg border border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
         {outcomes.map((item) => (
           <div key={item.title} className="flex flex-col gap-3 bg-card p-6">
