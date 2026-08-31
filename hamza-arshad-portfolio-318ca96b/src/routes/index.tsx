@@ -608,14 +608,28 @@ function PlatformsSection() {
             </div>
           </div>
           <div>
-            <SectionHeader eyebrow="06 / Platform" title="Microsoft Advertising" description="Two separate campaign snapshots, reported independently." />
+            <SectionHeader
+              eyebrow="06 / Platform"
+              title="Microsoft Advertising"
+              description="Two separate campaign snapshots, reported independently. Client work spans HVAC, marketing agency, septic supplies, bail bond and law industries."
+            />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <SnapshotCard title="Bill's Heating" period="July 1–31, 2026" metrics={[["$42,099.41", "Spend"], ["6,916", "Clicks"], ["393,592", "Impressions"], ["$6.09", "Average CPC"]]} />
-              <SnapshotCard title="Giant Donut Marketing" period="Reported campaign snapshot" metrics={[["$6,833.13", "Spend"], ["7,369", "Clicks"], ["719", "Conversions"], ["≈ $9.50", "CPA"]]} />
+              <SnapshotCard
+                title="HVAC Company"
+                period="July 1–31, 2026"
+                note="Client name withheld for privacy"
+                metrics={[["$42,099.41", "Spend"], ["6,916", "Clicks"], ["393,592", "Impressions"], ["$6.09", "Average CPC"]]}
+              />
+              <SnapshotCard
+                title="Marketing Agency"
+                period="Reported campaign snapshot"
+                note="Client name withheld for privacy"
+                metrics={[["$6,833.13", "Spend"], ["7,369", "Clicks"], ["719", "Conversions"], ["≈ $9.50", "CPA"]]}
+              />
             </div>
           </div>
         </div>
-        <ScreenshotCard image={microsoftAdsImage} alt="Microsoft Advertising dashboard showing spend, clicks, conversions and impressions" caption="Microsoft Advertising overview — Giant Donut Marketing snapshot" />
+        <ScreenshotCard image={microsoftAdsImage} alt="Microsoft Advertising dashboard showing spend, clicks, conversions and impressions" caption="Microsoft Advertising overview — Marketing Agency snapshot (client name withheld)" />
       </div>
     </section>
   );
@@ -703,7 +717,21 @@ const caseStudies = [
   {
     label: "Case Study · Paid Media",
     title: "Multi-Industry Paid Media",
-    tags: ["Healthcare", "HVAC", "Plumbing", "Roofing", "Landscaping", "Septic Services", "Cleaning", "Legal", "Ecommerce", "Professional Services"],
+    tags: [
+      "Healthcare",
+      "HVAC",
+      "Plumbing",
+      "Roofing",
+      "Landscaping",
+      "Septic Services",
+      "Septic Supplies",
+      "Cleaning",
+      "Legal",
+      "Bail Bond",
+      "Marketing Agency",
+      "Ecommerce",
+      "Professional Services",
+    ],
     rows: [
       ["Focus", "Google Ads, Meta Ads, Microsoft Ads, conversion tracking, campaign optimization and performance analysis."],
       ["Note", "Performance figures shown on this page relate to their stated reporting periods only."],
@@ -938,11 +966,22 @@ function ScreenshotCard({ image, alt, caption }: { image: string; alt: string; c
   );
 }
 
-function SnapshotCard({ title, period, metrics }: { title: string; period: string; metrics: string[][] }) {
+function SnapshotCard({
+  title,
+  period,
+  note,
+  metrics,
+}: {
+  title: string;
+  period: string;
+  note?: string;
+  metrics: string[][];
+}) {
   return (
     <article className="rounded-lg border border-border bg-card p-5 shadow-card">
       <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
       <p className="mt-2 text-sm font-semibold text-muted-foreground">{period}</p>
+      {note ? <p className="mt-1 text-xs font-medium italic text-muted-foreground/80">{note}</p> : null}
       <div className="mt-5 grid gap-3">
         {metrics.map(([value, label]) => (
           <div key={`${title}-${label}`} className="flex items-center justify-between gap-3 border-t border-border pt-3">
