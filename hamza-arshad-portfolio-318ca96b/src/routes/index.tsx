@@ -22,6 +22,7 @@ import hamzaImage from "@/assets/hamza.webp";
 import microsoftAdsImage from "@/assets/microsoft-ads.webp";
 import sprinklersLandscapingImage from "@/assets/sprinklers-landscaping-google-ads.webp";
 import septicServicesImage from "@/assets/septic-services-google-ads.webp";
+import drainFieldImage from "@/assets/drain-field-google-ads.webp";
 import { OG_IMAGE, absoluteUrl } from "@/lib/site";
 
 const linkedInUrl = "https://www.linkedin.com/in/hamza-arshad-profile/";
@@ -599,6 +600,28 @@ function PlatformsSection() {
         </div>
 
         <div>
+          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Drain Field Services (US)</h3>
+          <p className="mt-2 text-sm font-semibold text-muted-foreground">1 Aug – 30 Aug 2026</p>
+          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <SnapshotCard
+              title="Drain Field Services"
+              period="1 Aug – 30 Aug 2026"
+              metrics={[
+                ["3.19K", "Clicks"],
+                ["472.50", "Conversions"],
+                ["$3.24K", "Cost"],
+                ["$6.85", "Cost / Conversion"],
+              ]}
+            />
+            <ScreenshotCard
+              image={drainFieldImage}
+              alt="Google Ads performance chart for a drain field services business showing clicks, conversions, cost and cost per conversion"
+              caption="Google Ads campaign — Drain Field Services (US) · 1 Aug – 30 Aug 2026"
+            />
+          </div>
+        </div>
+
+        <div>
           <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
           <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <MiniMetricGrid metrics={[["$9.6K+", "Spend"], ["317", "Leads"], ["147K+", "Impressions"], ["84K+", "Reach"]]} />
@@ -733,6 +756,7 @@ const caseStudies = [
       "Landscaping",
       "Septic Services",
       "Septic Supplies",
+      "Drain Field Services",
       "Cleaning",
       "Legal",
       "Bail Bond",
