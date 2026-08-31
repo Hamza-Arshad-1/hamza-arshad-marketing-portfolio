@@ -87,6 +87,59 @@ const metaCapabilities = [
 
 const metaIndustries = ["Dentists", "Sports", "Cafe", "Education", "Clothing", "Food", "HVAC", "& Others"];
 
+const clientCampaignAccent = ["var(--chart-1)", "var(--chart-3)", "var(--chart-5)"];
+
+const clientCampaigns = [
+  {
+    id: "sprinklers",
+    title: "Sprinklers & Landscaping (US)",
+    period: "30 Mar – 24 Aug 2026",
+    note: "Conversions tracked as phone call leads and form submissions",
+    metrics: [
+      ["1.03K", "Clicks"],
+      ["4.70%", "Actual ROAS"],
+      ["199.99", "Conversions"],
+      ["$2.81K", "Cost"],
+    ],
+    image: sprinklersLandscapingImage,
+    alt: "Google Ads performance chart for a sprinklers and landscaping business showing clicks, actual ROAS, conversions and cost",
+  },
+  {
+    id: "septic",
+    title: "Septic Services (US)",
+    period: "27 Apr – 24 Aug 2026",
+    metrics: [
+      ["1.43K", "Clicks"],
+      ["567.85", "Conversions"],
+      ["$14.19", "Cost / Conv."],
+      ["$8.06K", "Cost"],
+    ],
+    image: septicServicesImage,
+    alt: "Google Ads performance chart for a septic services business showing clicks, conversions, cost per conversion and cost",
+    searchTerms: [
+      "septic tank pumping",
+      "septic service near me",
+      "septic companies near me",
+      "septic pumping near me",
+      "septic tank pumping near me",
+      "septic system service near me",
+    ],
+  },
+  {
+    id: "drain-field",
+    title: "Drain Field Services (US)",
+    period: "1 Aug – 30 Aug 2026",
+    metrics: [
+      ["3.19K", "Clicks"],
+      ["472.50", "Conversions"],
+      ["$3.24K", "Cost"],
+      ["$6.85", "Cost / Conv."],
+    ],
+    image: drainFieldImage,
+    alt: "Google Ads performance chart for a drain field services business showing clicks, conversions, cost and cost per conversion",
+  },
+];
+
 const performanceMetrics = [
   ["CTR", "Creative & keyword relevance"],
   ["CPC", "Auction efficiency"],
@@ -535,90 +588,54 @@ function PlatformsSection() {
         </div>
 
         <div>
-          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Sprinklers & Landscaping (US)</h3>
+          <h3 className="font-display text-xl font-bold text-ink">Client Campaign Snapshots</h3>
           <p className="mt-2 text-sm font-semibold text-muted-foreground">
-            30 Mar – 24 Aug 2026 · Conversions tracked as phone call leads and form submissions
+            Individual Google Ads accounts, each reported independently — swipe to browse.
           </p>
-          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <SnapshotCard
-              title="Sprinklers & Landscaping"
-              period="30 Mar – 24 Aug 2026"
-              metrics={[
-                ["1.03K", "Clicks"],
-                ["4.70%", "Actual ROAS"],
-                ["199.99", "Conversions"],
-                ["$2.81K", "Cost"],
-              ]}
-            />
-            <ScreenshotCard
-              image={sprinklersLandscapingImage}
-              alt="Google Ads performance chart for a sprinklers and landscaping business showing clicks, actual ROAS, conversions and cost"
-              caption="Google Ads campaign — Sprinklers & Landscaping (US) · 30 Mar – 24 Aug 2026"
-            />
+          <div className="relative mt-6">
+            <div className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-4">
+              {clientCampaigns.map((campaign, index) => (
+                <article
+                  key={campaign.id}
+                  className="w-[85vw] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-card shadow-card sm:w-[380px]"
+                >
+                  <span
+                    className="block h-1.5 w-full"
+                    style={{ background: clientCampaignAccent[index % clientCampaignAccent.length] }}
+                    aria-hidden="true"
+                  />
+                  <img src={campaign.image} alt={campaign.alt} className="aspect-[16/10] w-full object-cover" loading="lazy" />
+                  <div className="p-5">
+                    <h4 className="font-display text-lg font-bold text-ink">{campaign.title}</h4>
+                    <p className="mt-1 text-xs font-semibold text-muted-foreground">{campaign.period}</p>
+                    {campaign.note ? <p className="mt-1 text-xs italic text-muted-foreground/80">{campaign.note}</p> : null}
+                    <div className="mt-4 grid grid-cols-2 gap-4 border-t border-border pt-4">
+                      {campaign.metrics.map(([value, label]) => (
+                        <div key={label}>
+                          <p className="font-display text-lg font-bold text-ink">{value}</p>
+                          <p className="text-xs font-semibold text-muted-foreground">{label}</p>
+                        </div>
+                      ))}
+                    </div>
+                    {campaign.searchTerms ? (
+                      <div className="mt-4 border-t border-border pt-4">
+                        <p className="text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground">Top Search Terms</p>
+                        <div className="mt-2 flex flex-wrap gap-1.5">
+                          {campaign.searchTerms.map((term) => (
+                            <span key={term} className="rounded-full bg-secondary px-2 py-1 text-[10px] font-bold text-secondary-foreground">
+                              {term}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-surface to-transparent" aria-hidden="true" />
           </div>
-        </div>
-
-        <div>
-          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Septic Services (US)</h3>
-          <p className="mt-2 text-sm font-semibold text-muted-foreground">27 Apr – 24 Aug 2026</p>
-          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <SnapshotCard
-              title="Septic Services"
-              period="27 Apr – 24 Aug 2026"
-              metrics={[
-                ["1.43K", "Clicks"],
-                ["567.85", "Conversions"],
-                ["$14.19", "Cost / Conversion"],
-                ["$8.06K", "Cost"],
-              ]}
-            />
-            <ScreenshotCard
-              image={septicServicesImage}
-              alt="Google Ads performance chart for a septic services business showing clicks, conversions, cost per conversion and cost"
-              caption="Google Ads campaign — Septic Services (US) · 27 Apr – 24 Aug 2026"
-            />
-          </div>
-          <article className="mt-6 rounded-lg border border-border bg-card p-6 shadow-card">
-            <h4 className="font-display text-lg font-bold text-ink">Top Search Terms Triggering Ads</h4>
-            <p className="mt-1 text-sm font-semibold text-muted-foreground">From the account's search terms report</p>
-            <PillList
-              items={[
-                "septic tank pumping",
-                "septic service near me",
-                "septic companies near me",
-                "septic pumping near me",
-                "septic tank pumping near me",
-                "septic system service near me",
-                "septic near me",
-                "septic services near me",
-                "septic company near me",
-                "septic tank cleaning",
-              ]}
-              className="mt-5"
-            />
-          </article>
-        </div>
-
-        <div>
-          <h3 className="font-display text-xl font-bold text-ink">Client Snapshot: Drain Field Services (US)</h3>
-          <p className="mt-2 text-sm font-semibold text-muted-foreground">1 Aug – 30 Aug 2026</p>
-          <div className="mt-6 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <SnapshotCard
-              title="Drain Field Services"
-              period="1 Aug – 30 Aug 2026"
-              metrics={[
-                ["3.19K", "Clicks"],
-                ["472.50", "Conversions"],
-                ["$3.24K", "Cost"],
-                ["$6.85", "Cost / Conversion"],
-              ]}
-            />
-            <ScreenshotCard
-              image={drainFieldImage}
-              alt="Google Ads performance chart for a drain field services business showing clicks, conversions, cost and cost per conversion"
-              caption="Google Ads campaign — Drain Field Services (US) · 1 Aug – 30 Aug 2026"
-            />
-          </div>
+          <p className="mt-2 text-xs font-semibold text-muted-foreground">Scroll to see all client campaigns →</p>
         </div>
 
         <div>
