@@ -772,7 +772,8 @@ function ExperienceSection() {
 const caseStudies = [
   {
     label: "Case Study · Healthcare",
-    title: "Say Cheese Kids Dental & Orthodontics",
+    title: "Kids Dental Clinic (US)",
+    note: "Client name withheld for privacy",
     tags: ["Website", "SEO", "Google Business Profile", "Digital Marketing", "Conversion-focused strategy"],
     rows: [
       ["Challenge", "A practice roughly 7 months old with limited local visibility and few inbound patient enquiries."],
@@ -828,6 +829,9 @@ function WorkSection() {
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">{study.label}</p>
               <h3 className="mt-4 font-display text-2xl font-bold text-ink sm:text-3xl">{study.title}</h3>
+              {"note" in study && study.note ? (
+                <p className="mt-1 text-xs font-medium italic text-muted-foreground/80">{study.note}</p>
+              ) : null}
               <PillList items={study.tags} className="mt-5" />
               <div className="mt-8 space-y-6">
                 {study.rows.map(([label, text]) => (
