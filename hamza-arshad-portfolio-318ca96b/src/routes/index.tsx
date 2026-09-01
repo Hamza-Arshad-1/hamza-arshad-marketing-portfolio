@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -324,15 +324,21 @@ function SiteHeader() {
         </a>
         <div className="hidden items-center gap-6 lg:flex">
           {links.map(([label, href]) => (
-            <a key={href} href={href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">
+            <a
+              key={href}
+              href={href}
+              className="group relative text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+            >
               {label}
+              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand transition-all duration-300 group-hover:w-full" aria-hidden="true" />
             </a>
           ))}
-          <Link to="/media-buying" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">
+          <Link to="/media-buying" className="group relative text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">
             Media Buying
+            <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand transition-all duration-300 group-hover:w-full" aria-hidden="true" />
           </Link>
         </div>
-        <Button asChild size="sm" className="bg-brand text-brand-foreground shadow-none hover:bg-brand/90">
+        <Button asChild size="sm" className="glow-brand bg-brand text-brand-foreground shadow-none hover:bg-brand/90">
           <a href={linkedInUrl} target="_blank" rel="noreferrer">
             <Linkedin aria-hidden="true" />
             LinkedIn
@@ -352,7 +358,7 @@ function HeroSection() {
             Performance Marketing Portfolio · 2+ Years Experience
           </p>
           <h1 className="font-display text-5xl font-bold leading-[0.98] text-ink text-balance sm:text-6xl lg:text-7xl">
-            Digital Marketing Lead & Performance Marketer
+            Digital Marketing Lead & <span className="gradient-text">Performance Marketer</span>
           </h1>
           <p className="mt-7 max-w-2xl text-xl font-semibold leading-8 text-foreground">
             Specializing in Paid Media, Performance Marketing, Analytics & Conversion Tracking.
@@ -361,13 +367,17 @@ function HeroSection() {
             I combine hands-on campaign management, data analysis, technical tracking and digital marketing strategy to improve acquisition performance and measurable business outcomes.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild className="bg-brand text-brand-foreground shadow-card hover:bg-brand/90">
+            <Button asChild className="glow-brand bg-brand text-brand-foreground shadow-card hover:bg-brand/90">
               <a href={linkedInUrl} target="_blank" rel="noreferrer">
                 <Linkedin aria-hidden="true" />
                 View LinkedIn
               </a>
             </Button>
-            <Button asChild variant="outline" className="border-border bg-surface-elevated text-foreground shadow-none hover:bg-surface-soft">
+            <Button
+              asChild
+              variant="outline"
+              className="border-border bg-surface-elevated text-foreground shadow-none transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:bg-surface-soft"
+            >
               <a href="#experience">
                 View Experience
                 <ArrowUpRight aria-hidden="true" />
@@ -387,7 +397,7 @@ function HeroSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-[470px] lg:max-w-[520px]">
-          <div className="absolute inset-8 rounded-full bg-accent blur-3xl" aria-hidden="true" />
+          <div className="animate-float absolute inset-8 rounded-full bg-accent blur-3xl" aria-hidden="true" />
           <div className="relative aspect-square rounded-full border-[18px] border-surface-elevated bg-accent p-3 shadow-soft">
             <img
               src={hamzaImage}
@@ -397,7 +407,7 @@ function HeroSection() {
             />
           </div>
           <div
-            className="absolute -right-2 top-6 hidden -rotate-3 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-soft sm:flex lg:-right-6"
+            className="hover-lift absolute -right-2 top-6 hidden -rotate-3 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-soft sm:flex lg:-right-6"
             aria-hidden="true"
           >
             <TrendingUp className="size-5 text-brand" />
@@ -407,7 +417,7 @@ function HeroSection() {
             </div>
           </div>
           <div
-            className="absolute -left-2 bottom-10 hidden rotate-2 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-soft sm:flex lg:-left-8"
+            className="hover-lift absolute -left-2 bottom-10 hidden rotate-2 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 shadow-soft sm:flex lg:-left-8"
             aria-hidden="true"
           >
             <PieChart className="size-5 text-brand" />
@@ -458,8 +468,8 @@ function ProofSection() {
     >
       <div className="grid gap-4 lg:grid-cols-4 lg:[grid-auto-flow:dense]">
         {feature ? (
-          <article className="relative overflow-hidden rounded-2xl border border-border bg-ink p-8 text-primary-foreground shadow-soft lg:col-span-2 lg:row-span-2">
-            <div className="pointer-events-none absolute -right-10 -top-10 size-48 rounded-full bg-brand/25 blur-3xl" aria-hidden="true" />
+          <article className="hover-lift relative overflow-hidden rounded-2xl border border-border bg-ink p-8 text-primary-foreground shadow-soft lg:col-span-2 lg:row-span-2">
+            <div className="animate-float pointer-events-none absolute -right-10 -top-10 size-48 rounded-full bg-brand/25 blur-3xl" aria-hidden="true" />
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-soft">{feature.note}</p>
             <p className="mt-6 font-display text-6xl font-bold leading-none">{feature.value}</p>
             <p className="mt-4 text-lg font-semibold text-primary-foreground/85">{feature.label}</p>
@@ -471,7 +481,7 @@ function ProofSection() {
           </article>
         ) : null}
         {rest.map((metric) => (
-          <article key={metric.label} className="rounded-lg border border-border bg-card p-5 shadow-card">
+          <article key={metric.label} className="hover-lift rounded-lg border border-border bg-card p-5 shadow-card">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">{metric.note}</p>
             <p className="mt-4 font-display text-4xl font-bold text-ink">{metric.value}</p>
             <p className="mt-2 font-semibold text-foreground">{metric.label}</p>
@@ -495,7 +505,7 @@ function AboutSection() {
         <span className="absolute left-[11px] top-2 bottom-2 w-px bg-border sm:left-[15px]" aria-hidden="true" />
         {paragraphs.map((text, index) => (
           <div key={text} className="relative">
-            <span className="absolute -left-10 top-0 grid size-6 place-items-center rounded-full border-2 border-brand bg-background font-display text-[11px] font-bold text-brand sm:-left-14 sm:size-8">
+            <span className="animate-pulse-ring absolute -left-10 top-0 grid size-6 place-items-center rounded-full border-2 border-brand bg-background font-display text-[11px] font-bold text-brand sm:-left-14 sm:size-8">
               {String(index + 1).padStart(2, "0")}
             </span>
             <p className="text-lg leading-8 text-muted-foreground">{text}</p>
@@ -505,6 +515,8 @@ function AboutSection() {
     </Section>
   );
 }
+
+const specializationAccent = ["var(--chart-2)", "var(--chart-3)", "var(--chart-4)"];
 
 function SpecializationSection() {
   const spans = ["md:col-span-2 md:row-span-2", "md:col-span-1", "md:col-span-1", "md:col-span-3"];
@@ -518,7 +530,7 @@ function SpecializationSection() {
           return (
             <article
               key={card.title}
-              className={`rounded-lg border border-border p-6 shadow-card ${isFeature ? "bg-ink text-primary-foreground" : "bg-card"} ${spans[index] ?? ""}`}
+              className={`hover-lift rounded-lg border border-border p-6 shadow-card ${isFeature ? "bg-ink text-primary-foreground" : "bg-card"} ${spans[index] ?? ""}`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -535,7 +547,10 @@ function SpecializationSection() {
                       {card.tag}
                     </span>
                   ) : null}
-                  <span className={`grid size-11 shrink-0 place-items-center rounded-lg ${isFeature ? "bg-white/10 text-brand-soft" : "bg-secondary text-brand"}`}>
+                  <span
+                    className={`grid size-11 shrink-0 place-items-center rounded-lg ${isFeature ? "bg-white/10 text-brand-soft" : "text-white"}`}
+                    style={isFeature ? undefined : { background: specializationAccent[(index - 1) % specializationAccent.length] }}
+                  >
                     <Icon aria-hidden="true" />
                   </span>
                 </div>
@@ -566,8 +581,10 @@ function PlatformsSection() {
   return (
     <section id="platforms" className="dot-grid border-y border-border/80 bg-surface">
       <div className="section-shell section-pad space-y-16">
-        <SectionHeader eyebrow="04 / Platform" title="Google Ads" description="My strongest paid media specialization." />
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <Reveal>
+          <SectionHeader eyebrow="04 / Platform" title="Google Ads" description="My strongest paid media specialization." />
+        </Reveal>
+        <Reveal delay={100} className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div className="space-y-6">
             <MiniMetricGrid
               metrics={[
@@ -577,7 +594,7 @@ function PlatformsSection() {
                 ["12.1M+", "Impressions"],
               ]}
             />
-            <article className="rounded-lg border border-border bg-card p-6 shadow-card">
+            <article className="hover-lift rounded-lg border border-border bg-card p-6 shadow-card">
               <h3 className="font-display text-xl font-bold text-ink">Campaign Types</h3>
               <PillList items={["Search", "Performance Max", "Display", "Demand Gen"]} className="mt-5" />
               <h3 className="mt-8 font-display text-xl font-bold text-ink">Capabilities</h3>
@@ -585,9 +602,9 @@ function PlatformsSection() {
             </article>
           </div>
           <ScreenshotCard image={googleAdsImage} alt="Google Ads overview dashboard showing spend, clicks, conversions and impressions" caption="Google Ads account overview — 25 Jul – 23 Aug 2026" />
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal>
           <h3 className="font-display text-xl font-bold text-ink">Client Campaign Snapshots</h3>
           <p className="mt-2 text-sm font-semibold text-muted-foreground">
             Individual Google Ads accounts, each reported independently — swipe to browse.
@@ -597,7 +614,7 @@ function PlatformsSection() {
               {clientCampaigns.map((campaign, index) => (
                 <article
                   key={campaign.id}
-                  className="w-[85vw] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-card shadow-card sm:w-[380px]"
+                  className="hover-lift w-[85vw] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-card shadow-card sm:w-[380px]"
                 >
                   <span
                     className="block h-1.5 w-full"
@@ -636,22 +653,22 @@ function PlatformsSection() {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-surface to-transparent" aria-hidden="true" />
           </div>
           <p className="mt-2 text-xs font-semibold text-muted-foreground">Scroll to see all client campaigns →</p>
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal>
           <SectionHeader eyebrow="05 / Platform" title="Meta Ads" description="Selected campaign period results and lead generation execution." />
           <div className="mt-8 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
             <MiniMetricGrid metrics={[["$9.6K+", "Spend"], ["317", "Leads"], ["147K+", "Impressions"], ["84K+", "Reach"]]} />
-            <article className="rounded-lg border border-border bg-card p-6 shadow-card">
+            <article className="hover-lift rounded-lg border border-border bg-card p-6 shadow-card">
               <h3 className="font-display text-xl font-bold text-ink">Industries</h3>
               <PillList items={metaIndustries} className="mt-5" />
               <h3 className="mt-8 font-display text-xl font-bold text-ink">Execution</h3>
               <PillList items={metaCapabilities} className="mt-5" />
             </article>
           </div>
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal>
           <SectionHeader
             eyebrow="06 / Platform"
             title="Microsoft Advertising"
@@ -677,7 +694,7 @@ function PlatformsSection() {
             caption="Microsoft Advertising overview — Marketing Agency snapshot (client name withheld)"
             className="mt-6"
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -689,19 +706,19 @@ function MethodSection() {
       <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
         <div className="grid gap-4 sm:grid-cols-2">
           {performanceMetrics.map(([metric, meaning]) => (
-            <article key={metric} className="rounded-lg border border-border bg-card p-5 shadow-card">
+            <article key={metric} className="hover-lift rounded-lg border border-border bg-card p-5 shadow-card">
               <p className="font-display text-2xl font-bold text-ink">{metric}</p>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{meaning}</p>
             </article>
           ))}
         </div>
-        <article className="rounded-lg border border-border bg-surface-elevated p-6 shadow-card">
+        <article className="hover-lift rounded-lg border border-border bg-surface-elevated p-6 shadow-card">
           <h3 className="font-display text-2xl font-bold text-ink">Tracking & Measurement</h3>
           <p className="mt-3 leading-7 text-muted-foreground">I believe performance marketing starts with accurate data.</p>
           <div className="mt-7 flex flex-wrap items-center gap-x-2 gap-y-3">
             {measurementFlow.map((step, index) => (
               <div key={step} className="flex items-center gap-2">
-                <span className="flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 shadow-card">
+                <span className="flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-2 shadow-card transition-colors hover:border-brand/40 hover:bg-brand-soft/40">
                   <span className="grid size-6 shrink-0 place-items-center rounded-full bg-brand-soft text-[11px] font-bold text-brand">
                     {index + 1}
                   </span>
@@ -724,20 +741,24 @@ function ExperienceSection() {
   return (
     <section id="experience" className="border-y border-border/80 bg-surface">
       <div className="section-shell section-pad">
-        <SectionHeader eyebrow="08 / CV" title="Professional Experience" />
+        <Reveal>
+          <SectionHeader eyebrow="08 / CV" title="Professional Experience" />
+        </Reveal>
         <div className="mt-12 space-y-12 border-l-2 border-border pl-8 sm:pl-10">
-          {experience.map((item) => (
-            <article key={item.role} className="relative">
-              <span className="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-background bg-brand shadow-soft sm:-left-[49px]" aria-hidden="true" />
-              <p className="text-sm font-bold uppercase tracking-[0.12em] text-muted-foreground">{item.period}</p>
-              <h3 className="mt-2 font-display text-2xl font-bold text-ink">{item.role}</h3>
-              <p className="mt-1 font-semibold text-brand">{item.company}</p>
-              <p className="mt-4 max-w-3xl leading-8 text-muted-foreground">{item.description}</p>
-              <PillList items={item.bullets} className="mt-5" />
-            </article>
+          {experience.map((item, index) => (
+            <Reveal key={item.role} delay={index * 100} className="relative">
+              <article>
+                <span className="animate-pulse-ring absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-background bg-brand shadow-soft sm:-left-[49px]" aria-hidden="true" />
+                <p className="text-sm font-bold uppercase tracking-[0.12em] text-muted-foreground">{item.period}</p>
+                <h3 className="mt-2 font-display text-2xl font-bold text-ink">{item.role}</h3>
+                <p className="mt-1 font-semibold text-brand">{item.company}</p>
+                <p className="mt-4 max-w-3xl leading-8 text-muted-foreground">{item.description}</p>
+                <PillList items={item.bullets} className="mt-5" />
+              </article>
+            </Reveal>
           ))}
         </div>
-        <div className="mt-8 rounded-lg border border-border bg-surface-elevated p-6 shadow-card">
+        <div className="hover-lift mt-8 rounded-lg border border-border bg-surface-elevated p-6 shadow-card">
           <p className="font-display text-xl font-bold text-ink">Reported snapshots</p>
           <p className="mt-3 leading-7 text-muted-foreground">
             Latest 30 Days — Google Ads: $638K+ spend · 6.38K+ conversions · 187K+ clicks · 12.1M+ impressions. Selected Campaign Period — Meta Ads: $9.6K+ spend · 317 leads.
@@ -803,7 +824,7 @@ function WorkSection() {
           {caseStudies.map((study) => (
             <article
               key={study.title}
-              className="w-[85vw] shrink-0 snap-start rounded-lg border border-border bg-card p-6 shadow-card sm:w-[560px] sm:p-8"
+              className="hover-lift w-[85vw] shrink-0 snap-start rounded-lg border border-border bg-card p-6 shadow-card sm:w-[560px] sm:p-8"
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">{study.label}</p>
               <h3 className="mt-4 font-display text-2xl font-bold text-ink sm:text-3xl">{study.title}</h3>
@@ -827,7 +848,7 @@ function WorkSection() {
       <p className="mt-2 text-xs font-semibold text-muted-foreground">Scroll to see all case studies →</p>
       <div className="mt-10 grid grid-cols-1 divide-y divide-border overflow-hidden rounded-lg border border-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
         {outcomes.map((item) => (
-          <div key={item.title} className="flex flex-col gap-3 bg-card p-6">
+          <div key={item.title} className="flex flex-col gap-3 bg-card p-6 transition-colors hover:bg-brand-soft/30">
             <CheckCircle2 className="text-success" aria-hidden="true" />
             <h3 className="font-display text-xl font-bold text-ink">{item.title}</h3>
             <p className="text-sm leading-6 text-muted-foreground">{item.description}</p>
@@ -844,11 +865,13 @@ function SkillsSection() {
   return (
     <section id="skills" className="border-y border-border/80 bg-surface">
       <div className="section-shell section-pad">
-        <SectionHeader eyebrow="10 / Matrix" title="Skills" />
-        <div className="relative mt-10">
+        <Reveal>
+          <SectionHeader eyebrow="10 / Matrix" title="Skills" />
+        </Reveal>
+        <Reveal delay={100} className="relative mt-10">
           <div className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-4">
             {skillGroups.map((group) => (
-              <article key={group.title} className="w-[260px] shrink-0 snap-start rounded-lg border border-border bg-card p-6 shadow-card">
+              <article key={group.title} className="hover-lift w-[260px] shrink-0 snap-start rounded-lg border border-border bg-card p-6 shadow-card">
                 <h3 className="font-display text-xl font-bold text-ink">{group.title}</h3>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
@@ -866,9 +889,9 @@ function SkillsSection() {
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-surface to-transparent" aria-hidden="true" />
           <p className="mt-2 text-xs font-semibold text-muted-foreground">Scroll to see all skill groups →</p>
-        </div>
+        </Reveal>
 
-        <div className="mt-14">
+        <Reveal delay={150} className="mt-14">
           <SectionHeader eyebrow="11 / Reach" title="Multi-Platform Paid Media Experience" />
           <div className="mt-8 flex flex-wrap gap-2">
             {platforms.map((platform, index) => (
@@ -878,15 +901,15 @@ function SkillsSection() {
                 onClick={() => setActivePlatform(index)}
                 className={
                   activePlatform === index
-                    ? "rounded-full bg-brand px-4 py-2 text-sm font-bold text-brand-foreground transition-colors"
-                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-bold text-foreground transition-colors hover:bg-surface-soft"
+                    ? "rounded-full bg-brand px-4 py-2 text-sm font-bold text-brand-foreground shadow-glow transition-all"
+                    : "rounded-full border border-border bg-card px-4 py-2 text-sm font-bold text-foreground transition-all hover:-translate-y-0.5 hover:bg-surface-soft"
                 }
               >
                 {platform}
               </button>
             ))}
           </div>
-          <article className="mt-5 rounded-lg border border-border bg-card p-6 shadow-card">
+          <article className="hover-lift mt-5 rounded-lg border border-border bg-card p-6 shadow-card">
             <h3 className="font-display text-xl font-bold text-ink">{platforms[activePlatform]}</h3>
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
               {platformTasks.map((task) => (
@@ -897,7 +920,7 @@ function SkillsSection() {
               ))}
             </div>
           </article>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -910,8 +933,8 @@ function ProcessSection() {
         <span className="absolute left-0 right-0 top-6 hidden h-px bg-border lg:block" aria-hidden="true" />
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
           {processSteps.map(([title, description], index) => (
-            <div key={title} className="relative flex flex-col items-start gap-3 lg:items-center lg:text-center">
-              <span className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border-2 border-brand bg-background font-display text-sm font-bold text-brand">
+            <div key={title} className="group relative flex flex-col items-start gap-3 lg:items-center lg:text-center">
+              <span className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border-2 border-brand bg-background font-display text-sm font-bold text-brand transition-all duration-300 group-hover:scale-110 group-hover:bg-brand group-hover:text-brand-foreground group-hover:shadow-glow">
                 {index + 1}
               </span>
               <h3 className="font-display text-lg font-bold text-ink">{title}</h3>
@@ -927,32 +950,84 @@ function ProcessSection() {
 function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden bg-ink py-20 text-primary-foreground">
-      <div className="pointer-events-none absolute -left-20 -top-20 size-72 rounded-full bg-brand/25 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute -right-16 bottom-0 size-72 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
-      <div className="section-shell relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div className="animate-float pointer-events-none absolute -left-20 -top-20 size-72 rounded-full bg-brand/25 blur-3xl" aria-hidden="true" />
+      <div className="animate-float-delay pointer-events-none absolute -right-16 bottom-0 size-72 rounded-full bg-brand-2/25 blur-3xl" aria-hidden="true" />
+      <Reveal className="section-shell relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-brand-soft">13 / Contact</p>
-          <h2 className="mt-4 font-display text-4xl font-bold text-balance sm:text-5xl">Let's Connect</h2>
+          <h2 className="gradient-text mt-4 font-display text-4xl font-bold text-balance sm:text-5xl">Let's Connect</h2>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-primary-foreground/80">
             I'm open to opportunities in Performance Marketing, Paid Media and Digital Marketing.
           </p>
         </div>
-        <Button asChild className="bg-brand text-brand-foreground shadow-none hover:bg-brand/90">
+        <Button asChild className="glow-brand bg-brand text-brand-foreground shadow-none hover:bg-brand/90">
           <a href={linkedInUrl} target="_blank" rel="noreferrer">
             <Linkedin aria-hidden="true" />
             Connect on LinkedIn
           </a>
         </Button>
-      </div>
+      </Reveal>
     </section>
+  );
+}
+
+// Fade-and-rise reveal on scroll. Defaults to visible (no SSR flash, no-JS
+// fallback, and never hides content that's already on-screen at mount) —
+// only content starting below the fold gets hidden, then observed and
+// faded in the first time it scrolls into view.
+function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // Respect reduced motion, and provide a hard timeout failsafe so content
+    // can never end up permanently stuck invisible for any reason.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
+
+    const failsafe = window.setTimeout(() => setVisible(true), 2000);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setVisible(true);
+          window.clearTimeout(failsafe);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+    );
+    observer.observe(el);
+    return () => {
+      window.clearTimeout(failsafe);
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`js-reveal transition-all duration-700 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
+    >
+      {children}
+    </div>
   );
 }
 
 function Section({ id, eyebrow, title, description, children }: { id: string; eyebrow: string; title: string; description?: string | undefined; children: ReactNode }) {
   return (
     <section id={id} className="section-shell section-pad">
-      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
-      <div className="mt-10">{children}</div>
+      <Reveal>
+        <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+      </Reveal>
+      <Reveal delay={100} className="mt-10">
+        {children}
+      </Reveal>
     </section>
   );
 }
@@ -986,7 +1061,7 @@ function MiniMetricGrid({ metrics }: { metrics: string[][] }) {
   return (
     <div className="grid grid-cols-2 gap-4">
       {metrics.map(([value, label]) => (
-        <article key={`${value}-${label}`} className="rounded-lg border border-border bg-card p-5 shadow-card">
+        <article key={`${value}-${label}`} className="hover-lift rounded-lg border border-border bg-card p-5 shadow-card">
           <p className="font-display text-3xl font-bold text-ink">{value}</p>
           <p className="mt-2 text-sm font-semibold text-muted-foreground">{label}</p>
         </article>
@@ -1007,7 +1082,7 @@ function ScreenshotCard({
   className?: string;
 }) {
   return (
-    <figure className={`overflow-hidden rounded-lg border border-border bg-card shadow-soft ${className}`}>
+    <figure className={`hover-lift overflow-hidden rounded-lg border border-border bg-card shadow-soft ${className}`}>
       <img src={image} alt={alt} className="aspect-[16/8] w-full object-cover" loading="lazy" />
       <figcaption className="flex items-center gap-2 border-t border-border bg-surface-elevated px-5 py-4 text-sm font-semibold text-muted-foreground">
         <LineChart className="size-4 text-brand" aria-hidden="true" />
@@ -1029,7 +1104,7 @@ function SnapshotCard({
   metrics: string[][];
 }) {
   return (
-    <article className="rounded-lg border border-border bg-card p-5 shadow-card">
+    <article className="hover-lift rounded-lg border border-border bg-card p-5 shadow-card">
       <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
       <p className="mt-2 text-sm font-semibold text-muted-foreground">{period}</p>
       {note ? <p className="mt-1 text-xs font-medium italic text-muted-foreground/80">{note}</p> : null}

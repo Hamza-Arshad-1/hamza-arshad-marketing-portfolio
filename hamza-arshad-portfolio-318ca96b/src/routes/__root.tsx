@@ -116,6 +116,11 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Scroll-reveal effects hide content until JS observes it into view;
+            without JS that would never happen, so force it visible. */}
+        <noscript>
+          <style>{".js-reveal{opacity:1!important;transform:none!important;}"}</style>
+        </noscript>
       </head>
       <body>
         {children}
